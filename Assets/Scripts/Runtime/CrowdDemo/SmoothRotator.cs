@@ -5,19 +5,31 @@ namespace Runtime.CrowdDemo
     public class SmoothRotator : MonoBehaviour
     {
         [Range(0, 720)] public float maxAngularSpeed;
-        [Range(-180, 180)] public float desiredAngle;
 
-        public void SetDesiredForward(Vector3 forward)
-        {
-            desiredAngle = Vector3.SignedAngle(Vector3.forward, forward, Vector3.up);
-        }
+        private Vector3 _desiredForward;
 
         private void Update()
         {
-            var desiredForward = Quaternion.AngleAxis(desiredAngle, Vector3.up) * Vector3.forward;
-            var diffAngle = Vector3.SignedAngle(transform.forward, desiredForward, Vector3.up);
-            var deltaAngle = Mathf.Sign(diffAngle) * Mathf.Min(Time.deltaTime * maxAngularSpeed, Mathf.Abs(diffAngle));
-            transform.rotation *= Quaternion.AngleAxis(deltaAngle, Vector3.up);
+            if (_desiredForward == Vector3.zero)
+            {
+                return;
+            }
+
+            var diffAngle = Vector3.SignedAngle(transform.forward, _desiredForward, Vector3.up);
+            var absDiffAngle = Mathf.Abs(diffAngle);
+            if (absDiffAngle < 0.1f)
+            {
+                transform.rotation = Quaternion.LookRotation(_desiredForward);
+                return;
+            }
+
+            var absDeltaAngle = Mathf.Min(Time.deltaTime * maxAngularSpeed, absDiffAngle);
+            transform.Rotate(Vector3.up, Mathf.Sign(diffAngle) * absDeltaAngle);
+        }
+
+        public void SetDesiredForward(Vector3 forward)
+        {
+            _desiredForward = forward;
         }
     }
 }

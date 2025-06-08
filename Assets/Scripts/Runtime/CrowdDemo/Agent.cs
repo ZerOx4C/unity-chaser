@@ -7,6 +7,7 @@ namespace Runtime.CrowdDemo
 {
     public class Agent : MonoBehaviour
     {
+        private ForwardMover _mover;
         private NavMeshAgent _navMeshAgent;
         private SmoothRotator _rotator;
 
@@ -15,9 +16,11 @@ namespace Runtime.CrowdDemo
 
         private void Awake()
         {
+            _mover = GetComponent<ForwardMover>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _rotator = GetComponent<SmoothRotator>();
 
+            _navMeshAgent.acceleration = 1000;
             _navMeshAgent.updatePosition = false;
             _navMeshAgent.updateRotation = false;
         }
@@ -29,20 +32,30 @@ namespace Runtime.CrowdDemo
                 return;
             }
 
+            var sqrStoppingDistance = _navMeshAgent.stoppingDistance * _navMeshAgent.stoppingDistance;
+            if ((transform.position - DestinationTransform.position).sqrMagnitude <= sqrStoppingDistance)
+            {
+                IsArrived = true;
+                return;
+            }
+
+            IsArrived = false;
+
             if (0.1f < (DestinationTransform.position - _navMeshAgent.destination).magnitude)
             {
                 _navMeshAgent.destination = DestinationTransform.position;
             }
 
-            var sqrStoppingDistance = _navMeshAgent.stoppingDistance * _navMeshAgent.stoppingDistance;
-            IsArrived = (transform.position - DestinationTransform.position).sqrMagnitude <= sqrStoppingDistance;
-
-            var direction = _navMeshAgent.nextPosition - transform.position;
-            if (direction != Vector3.zero)
+            if (!Mathf.Approximately(_navMeshAgent.speed, _mover.maxSpeed))
             {
-                _rotator.SetDesiredForward(direction);
+                _navMeshAgent.speed = _mover.maxSpeed;
             }
 
+            var diffPosition = _navMeshAgent.nextPosition - transform.position;
+            _mover.SetDesiredVelocity(_mover.maxSpeed * diffPosition.normalized);
+            _rotator.SetDesiredForward(diffPosition);
+
+            _navMeshAgent.nextPosition = transform.position;
             transform.position = _navMeshAgent.nextPosition;
         }
     }

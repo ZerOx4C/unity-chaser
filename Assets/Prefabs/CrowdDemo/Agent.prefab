@@ -96,7 +96,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1994954361186265750}
   - component: {fileID: 1481356351342035767}
+  - component: {fileID: 2246305691623260680}
   - component: {fileID: -5534474289572161319}
+  - component: {fileID: 1572503007642312735}
   - component: {fileID: 6307876844781734555}
   m_Layer: 0
   m_Name: Agent
@@ -134,6 +136,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d0cb7b816d4f8a9aec9d56e5b71be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2246305691623260680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718454605244642406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aedf18f8bba9419c9ac1790fe751b5c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 10
 --- !u!114 &-5534474289572161319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +162,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxAngularSpeed: 360
-  desiredAngle: 0
+--- !u!54 &1572503007642312735
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718454605244642406}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!195 &6307876844781734555
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -181,7 +222,7 @@ GameObject:
   - component: {fileID: 6492985287625322174}
   - component: {fileID: 9090305823868268188}
   - component: {fileID: 8967960220010152480}
-  - component: {fileID: 1003937070761991581}
+  - component: {fileID: 1129700592268376824}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -257,8 +298,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1003937070761991581
-BoxCollider:
+--- !u!136 &1129700592268376824
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -275,6 +316,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}

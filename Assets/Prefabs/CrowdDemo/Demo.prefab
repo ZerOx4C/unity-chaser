@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce63ead9add346baa11e20010998ce60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  agentCount: 0
+  agentCount: 1
   agentPrefab: {fileID: 1481356351342035767, guid: 9ec96d9ad14718743baf0b80e4f5ea96, type: 3}
   stage: {fileID: 6317977952409311799}
 --- !u!1001 &8218044417386776159
