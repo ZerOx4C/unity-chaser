@@ -96,6 +96,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1994954361186265750}
   - component: {fileID: 1481356351342035767}
+  - component: {fileID: -5534474289572161319}
   - component: {fileID: 6307876844781734555}
   m_Layer: 0
   m_Name: Agent
@@ -133,6 +134,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90d0cb7b816d4f8a9aec9d56e5b71be9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5534474289572161319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3718454605244642406}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 224c4390779b4331a39f0332a46cc6bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxAngularSpeed: 360
+  desiredAngle: 0
 --- !u!195 &6307876844781734555
 NavMeshAgent:
   m_ObjectHideFlags: 0
